@@ -52,17 +52,6 @@ main {
   align-items: center;
 }
 
-footer {
-  text-align: center;
-  background-color: #d1e7f5;
-  padding: 15px 0;
-  border-top: 3px solid #b3cde3;
-  font-size: 1.1em;
-  color: #333;
-  width: 100%;
-  flex-shrink: 0;
-}
-
 button {
   cursor: pointer;
   background-color: #f7d6e0;

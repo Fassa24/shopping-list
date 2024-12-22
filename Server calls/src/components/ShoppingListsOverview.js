@@ -134,8 +134,6 @@ const ShoppingListsOverview = () => {
           </div>
         )}
       </main>
-
-      <footer>Frontend úkol - #4 Server calls</footer>
     </div>
   );
 };

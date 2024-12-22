@@ -193,8 +193,6 @@ const ShoppingListDetail = () => {
           Back to Overview
         </Link>
       </main>
-
-      <footer>Frontend úkol - #4 Server calls</footer>
     </div>
   );
 };

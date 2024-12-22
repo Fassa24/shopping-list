@@ -10,6 +10,8 @@ import {
   updateShoppingList,
   deleteShoppingList,
 } from "../api";
+import { Bar } from "react-chartjs-2";
+import "chart.js/auto";
 
 const ShoppingListsOverview = () => {
   const { t, i18n } = useTranslation();
@@ -100,6 +102,30 @@ const ShoppingListsOverview = () => {
 
   const filteredLists = shoppingLists.filter((list) => showArchived || !list.archived);
 
+  const barChartData = {
+    labels: filteredLists.map((list) => list.name),
+    datasets: [
+      {
+        label: t("shoppingListsOverview.solved"),
+        data: filteredLists.map((list) =>
+          list.items?.filter((item) => item.isCompleted).length || 0
+        ),
+        backgroundColor: "#d4f7dc", 
+        borderColor: "#a7d5b2",
+        borderWidth: 1,
+      },
+      {
+        label: t("shoppingListsOverview.unsolved"),
+        data: filteredLists.map((list) =>
+          list.items?.filter((item) => !item.isCompleted).length || 0
+        ),
+        backgroundColor: "#ffd4d4", 
+        borderColor: "#f5a7a7",
+        borderWidth: 1,
+      },
+    ],
+  };
+
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error}</div>;
 
@@ -140,6 +166,7 @@ const ShoppingListsOverview = () => {
             <div key={list.id} className="tile">
               <h3>{list.name}</h3>
               <p>{list.archived ? t("shoppingListsOverview.archived") : t("shoppingListsOverview.active")}</p>
+              <p>{t("shoppingListsOverview.itemCount", { total: list.items?.length || 0 })}</p>
 
               <div className="tile-buttons">
                 {list.owner === currentUser && (
@@ -156,6 +183,10 @@ const ShoppingListsOverview = () => {
               </div>
             </div>
           ))}
+        </div>
+
+        <div className="chart-container">
+          <Bar data={barChartData} />
         </div>
 
         <button id="addShoppingListBtn" onClick={() => setShowAddModal(true)}>

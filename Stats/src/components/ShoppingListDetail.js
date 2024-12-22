@@ -4,6 +4,8 @@ import "./ShoppingLists.css";
 import settingsIcon from "../settings.png";
 import { useTranslation } from "react-i18next";
 import { getShoppingLists, updateShoppingList } from "../api";
+import { Pie } from "react-chartjs-2";
+import "chart.js/auto";
 
 const ShoppingListDetail = () => {
   const { t, i18n } = useTranslation();
@@ -119,6 +121,20 @@ const ShoppingListDetail = () => {
 
   const filteredItems = items.filter((item) => showResolved || !item.isCompleted);
 
+  const solvedCount = items.filter((item) => item.isCompleted).length;
+  const unsolvedCount = items.length - solvedCount;
+
+  const pieData = {
+    labels: [t("shoppingListDetail.solved"), t("shoppingListDetail.unsolved")],
+    datasets: [
+      {
+        data: [solvedCount, unsolvedCount],
+        backgroundColor: ["#d4f7dc", "#ffd4d4"],
+        hoverBackgroundColor: ["#b8e6c7", "#f8bcbc"],
+      },
+    ],
+  };
+
   if (loading) return <div>{t("loading")}</div>;
   if (error) return <div>{t("errors.general", { message: error })}</div>;
 
@@ -153,6 +169,12 @@ const ShoppingListDetail = () => {
 
       <main className="shopping-list-detail">
         <h2>{list?.name}</h2>
+
+        <div className="statistics">
+          <div className="pie-chart">
+            <Pie data={pieData} />
+          </div>
+        </div>
 
         <div className="list-box">
           <h3>{t("shoppingListDetail.items")}</h3>

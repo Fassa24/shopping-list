@@ -16,6 +16,8 @@ const resources = {
         addMemberPlaceholder: "Enter new member email",
         leaveList: "Leave List",
         back: "Back to Overview",
+        solved: "Solved",
+        unsolved: "Unsolved",
       },
       shoppingListsOverview: {
         title: "Shopping Lists Overview",
@@ -29,7 +31,11 @@ const resources = {
         unarchive: "Unarchive",
         addNewList: "Add Shopping List",
         enterListName: "Enter list name",
-        cancel: "Cancel",      
+        cancel: "Cancel",
+        itemCount: "{{total}} items",
+        itemCounts: "Item Counts by List",
+        solved: "Solved",
+        unsolved: "Unsolved",
       },
       settings: {
         title: "Settings",
@@ -64,6 +70,8 @@ const resources = {
         addMemberPlaceholder: "Zadejte email nového člena",
         leaveList: "Opustit seznam",
         back: "Zpět na přehled",
+        solved: "Vyřešené",
+        unsolved: "Nevyřešené",
       },
       shoppingListsOverview: {
         title: "Přehled Nákupních Seznamů",
